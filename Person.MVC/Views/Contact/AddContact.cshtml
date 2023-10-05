@@ -1,0 +1,25 @@
+﻿@using Person.Domain;
+@using Person.Application.Commands;
+@{
+    ViewData["Title"] = "Add Contact";
+}
+@{
+    var dto = new ContactDTO();
+    var command = new AddContactCommand(dto);
+}
+<form class="mt-5" method="post" asp-action="AddContact" asp-controller="Contact">
+    <input type="text" asp-for="@command.contact.Name" required placeholder="نام" /><br />
+    <input type="text" asp-for="@command.contact.PhoneNumber" required placeholder="شماره تلفن همراه" /><br />
+    <span class="text-danger" asp-validation-for="@command.contact.PhoneNumber"></span>
+    <select asp-for="@command.contact.CityType" asp-items="Html.GetEnumSelectList<City>()">
+        <br />
+        <option></option>
+    </select>
+    <button type="submit" class="btn btn-warning">افزودن</button>
+
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+

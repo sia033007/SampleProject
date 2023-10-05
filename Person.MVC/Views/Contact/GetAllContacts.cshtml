@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ContactDTO>
+@{
+    ViewData["Title"] = "Contacts";
+}
+<a asp-action="AddContact">اضافه کردن</a>
+<table class="table table-striped table-bordered text-center mt-5">
+    <thead>
+        <tr>
+            <th>نام</th>
+            <th>شهر</th>
+            <th>شماره تلفن همراه</th>
+            <th>ویرایش</th>
+            <th>حذف</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td>@contact.Name</td>
+                <td>@contact.CityType</td>
+                <td>@contact.PhoneNumber</td>
+                <th>
+                    <form method="get" asp-action="GetContact">
+                        <input type="hidden" value="@contact.Id" name="id" />
+                        <button type="submit"><i class="bi bi-pen-fill"></i></button>
+                    </form>
+                </th>
+                <th>
+                    <form method="get" asp-action="DeleteContact">
+                        <input type="hidden" value="@contact.Id" name="id" />
+                        <button type="submit"><i class="bi bi-trash-fill"></i></button>
+                    </form>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
