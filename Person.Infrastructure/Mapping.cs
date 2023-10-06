@@ -14,6 +14,7 @@ namespace Person.Infrastructure
         public Mapping()
         {
             CreateMap<DeletedContact, DeletedContactDTO>().ReverseMap();
+            CreateMap<Contact, DeletedContactDTO>().ReverseMap();
         }
     }
 }

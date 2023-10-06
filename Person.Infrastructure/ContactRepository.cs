@@ -35,8 +35,9 @@ namespace Person.Infrastructure
         {
             var contact = await _context.Contacts.FindAsync(id);
             contact.IsDeleted = true;
-            var deletedContact = _mapper.Map<DeletedContact>(contact);
-            await _context.DeletedContacts.AddAsync(deletedContact);
+            var deletedContact = _mapper.Map<DeletedContactDTO>(contact);
+            var dataToAddToDb = _mapper.Map<DeletedContact>(deletedContact);
+            await _context.DeletedContacts.AddAsync(dataToAddToDb);
             _context.Contacts.Remove(contact);
             await _context.SaveChangesAsync();
         }
