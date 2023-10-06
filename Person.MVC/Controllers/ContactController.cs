@@ -18,39 +18,107 @@ namespace Person.MVC.Controllers
         }
         public async Task<IActionResult> GetAllContacts()
         {
-            var movies = await _mediator.Send(new GetAllContactsQuery());
-            return View(movies);
+            try
+            {
+                var movies = await _mediator.Send(new GetAllContactsQuery());
+                return View(movies);
+            }
+            catch(Exception exp)
+            {
+                return View(exp);
+
+            }
         }
         public async Task<IActionResult> GetContact(int id)
         {
-            var command = await _mediator.Send(new GetContactByIdQuery(id));
-            return View(command);
+            try
+            {
+                var command = await _mediator.Send(new GetContactByIdQuery(id));
+                return View(command);
+            }
+            catch(Exception exp)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> UpdateContact(UpdateContactCommand command)
         {
-            if (!ModelState.IsValid) return RedirectToAction("GetContact");
-            await _mediator.Send(command);
-            return RedirectToAction("GetAllContacts");
+            try
+            {
+                if (!ModelState.IsValid) return RedirectToAction("GetContact");
+                await _mediator.Send(command);
+                return RedirectToAction("GetAllContacts");
+            }
+            catch(Exception exp)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> AddContact(AddContactCommand command)
         {
-            if (!ModelState.IsValid) return View();
-            await _mediator.Send(command);
-            return RedirectToAction("GetAllContacts");
+            try
+            {
+                if (!ModelState.IsValid) return View();
+                await _mediator.Send(command);
+                return RedirectToAction("GetAllContacts");
+            }
+            catch(Exception exp)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         public ViewResult AddContact() => View();
 
         public async Task<IActionResult> DeleteContact(int id)
         {
-            await _mediator.Send(new DeleteContactCommand(id));
-            return RedirectToAction("GetAllContacts");
+            try
+            {
+                await _mediator.Send(new DeleteContactCommand(id));
+                return RedirectToAction("GetAllContacts");
+            }
+            catch(Exception exp)
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         public async Task<IActionResult> GetAllDeletedContacts()
         {
-            var deletedContacs = await _contactService.GetAllDeletedContacts();
-            return View(deletedContacs);
+            try
+            {
+                var deletedContacs = await _contactService.GetAllDeletedContacts();
+                return View(deletedContacs);
+            }
+            catch(Exception exp)
+            {
+                return View(exp);
+            }
+        }
+        public async Task<ActionResult> SearchContacts(string search)
+        {
+            try
+            {
+                var contatcs = await _contactService.LiveSearchForContacts(search);
+                return PartialView(contatcs);
+            }
+            catch(Exception exp)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        public ActionResult SearchDeletedContacts(string search)
+        {
+            try
+            {
+                var deletedContacts = _contactService.LiveSearchForDeletedContacts(search);
+                return PartialView(deletedContacts);
+            }
+            catch(Exception exp)
+            {
+                return RedirectToAction("Index", "Home");
+
+            }
         }
     }
 }

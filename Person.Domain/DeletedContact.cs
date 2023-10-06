@@ -13,7 +13,8 @@ namespace Person.Domain
         public int Id { get; set; }
         [MaxLength(50)]
         public string Name { get; set; } = string.Empty;
-        public City CityType { get; set; }
+        [MaxLength(50)]
+        public string CityType { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
     }
 }

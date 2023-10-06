@@ -40,9 +40,23 @@ namespace Person.Application
         {
             await _contactRepository.UpdateContact(contact);
         }
-        public async Task<List<DeletedContact>> GetAllDeletedContacts()
+        public async Task<List<DeletedContactDTO>> GetAllDeletedContacts()
         {
             return await _contactRepository.GetAllDeletedContacts();
+        }
+        public async Task<List<ContactDTO>> LiveSearchForContacts(string search)
+        {
+            return await _contactRepository.LiveSearchForContacts(search);
+
+        }
+        public async Task<List<DeletedContactDTO>> LiveSearchForDeletedContacts(string search)
+        {
+            return await _contactRepository.LiveSearchForDeletedContacts(search);
+
+        }
+        public List<string> GetAllCities()
+        {
+            return _contactRepository.GetAllCities();
         }
     }
 }

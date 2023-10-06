@@ -2,7 +2,12 @@
 @{
     ViewData["Title"] = "Contacts";
 }
-<a asp-action="AddContact">اضافه کردن</a>
+<input id="livesearchtags" name="livesearchtags" placeholder="Search" autocomplete="off" />
+
+<div id="result" class="tag-results">
+</div>
+
+<a class="btn btn-warning mt-5" asp-action="AddContact">اضافه کردن</a>
 <table class="table table-striped table-bordered text-center mt-5">
     <thead>
         <tr>
@@ -36,3 +41,30 @@
         }
     </tbody>
 </table>
+@section Scripts{
+    <script>
+        document.getElementById('livesearchtags').addEventListener('keyup', function (e) {
+            //Run LiveSearch on ever key up
+            LiveSearch()
+        });
+
+        function LiveSearch() {
+            //Get the input value
+            let value = document.getElementById('livesearchtags').value
+
+            $.ajax({
+                type: "POST",
+                // You can use the absolute url eg www.site.com/MyControllerName/LiveTagSearch or the relative path live below
+                url: "/Contact/SearchContacts",
+                // Attach the value to a parameter called search
+                data: { search: value },
+                datatype: "html",
+                success: function (data) {
+                    // Insert the returned search results html into the result element
+                    $('#result').html(data);
+                }
+            });
+        }
+
+    </script>
+}

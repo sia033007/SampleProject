@@ -13,10 +13,13 @@ namespace Person.Domain
         [Key]
         public int Id { get; set; }
         [MaxLength(50)]
+        [Required]
         public string Name { get; set; } = string.Empty;
-        [EnumDataType(typeof(City))]
-        public City CityType { get; set; }
+        [MaxLength(50)]
+        [Required]
+        public string CityType { get; set; } = string.Empty;
         [RegularExpression("^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}", ErrorMessage = "شماره همراه معتبر نیست")]
+        [Required]
         public string PhoneNumber { get; set; } = string.Empty;
         public string CreatedTime { get; set; } = string.Empty;
         public bool IsDeleted { get; set; } = false;

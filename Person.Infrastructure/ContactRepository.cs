@@ -59,10 +59,53 @@ namespace Person.Infrastructure
             _context.Entry(contact).Property(x => x.CreatedTime).IsModified = false;
             await _context.SaveChangesAsync();
         }
-        public async Task<List<DeletedContact>> GetAllDeletedContacts()
+        public async Task<List<DeletedContactDTO>> GetAllDeletedContacts()
         {
             var contacts = await _context.DeletedContacts.ToListAsync();
-            return contacts;
+            var contactsToShow = new List<DeletedContactDTO>();
+            foreach(var contact in contacts)
+            {
+                var dto = _mapper.Map<DeletedContactDTO>(contact);
+                contactsToShow.Add(dto);
+            }
+            return contactsToShow;
+        }
+        public async Task<List<ContactDTO>> LiveSearchForContacts(string search)
+        {
+            var contacts = await _context.Contacts.Where(c => c.Name.Contains(search) || c.PhoneNumber
+            .Contains(search) || c.CityType.Contains(search)).ToListAsync();
+            var contactDTO = new List<ContactDTO>();
+            foreach( var contact in contacts)
+            {
+                var dto = _mapper.Map<ContactDTO>(contact);
+                contactDTO.Add(dto);
+            }
+            return contactDTO;
+
+        }
+        public async Task<List<DeletedContactDTO>> LiveSearchForDeletedContacts(string search)
+        {
+            List<DeletedContact> deletedContacts = (
+                from t in _context.DeletedContacts
+                where t.Name.Contains(search) || t.PhoneNumber.Contains(search) || t.CityType.ToString().Contains(search)
+                select t
+                ).ToList();
+            var deleteContactDTO = new List<DeletedContactDTO>();
+            foreach (var contact in deletedContacts)
+            {
+                var dto = _mapper.Map<DeletedContactDTO>(contact);
+                deleteContactDTO.Add(dto);
+            }
+            return deleteContactDTO;
+
+        }
+        public List<string> GetAllCities()
+        {
+            var cities = new List<string>()
+            {
+               "تهران", "تبریز", "شیراز", "اصفهان", "مشهد"
+            };
+            return cities;
         }
         string PersianDate(DateTime DateTime1)
         {

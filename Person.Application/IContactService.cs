@@ -14,6 +14,9 @@ namespace Person.Application
         Task AddContact(Contact contact);
         Task UpdateContact(Contact contact);
         Task DeleteContact(int id);
-        Task<List<DeletedContact>> GetAllDeletedContacts();
+        Task<List<DeletedContactDTO>> GetAllDeletedContacts();
+        Task<List<ContactDTO>> LiveSearchForContacts(string search);
+        Task<List<DeletedContactDTO>> LiveSearchForDeletedContacts(string search);
+        List<string> GetAllCities();
     }
 }

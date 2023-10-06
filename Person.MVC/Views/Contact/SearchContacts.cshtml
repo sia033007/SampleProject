@@ -1,0 +1,11 @@
+﻿@model IEnumerable<ContactDTO>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.Name</td>
+        <td>@item.PhoneNumber   </td>
+        <td>@item.CityType</td>
+    </tr>
+
+}

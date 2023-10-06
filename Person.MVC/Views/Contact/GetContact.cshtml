@@ -1,19 +1,23 @@
 ﻿@model ContactDTO
 @using Person.Domain;
 @using Person.Application.Commands;
+@inject IContactService sevice
 @{
     ViewData["Title"] = "Contact Page";
 }
 @{
     var command = new UpdateContactCommand(Model);
+    var cities = sevice.GetAllCities();
 }
 <form class="mt-5" method="post" asp-action="UpdateContact">
     <input type="hidden" value="@Model.Id" asp-for="@command.contact.Id" />
     <input type="text" asp-for="@command.contact.Name" required placeholder="نام" /><br />
     <input type="text" asp-for="@command.contact.PhoneNumber" required placeholder="شماره تلفن همراه"/><br />
     <span class="text-danger" asp-validation-for="@command.contact.PhoneNumber"></span>
-    <select asp-for="@command.contact.CityType" asp-items="Html.GetEnumSelectList<City>()"><br />
-        <option></option>
+    <select asp-for="@command.contact.CityType"><br />
+        @foreach(var city in cities){
+            <option>@city</option>
+        }
     </select>
     <button type="submit" class="btn btn-warning">ویرایش</button>
 

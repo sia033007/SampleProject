@@ -1,19 +1,23 @@
 ﻿@using Person.Domain;
 @using Person.Application.Commands;
+@inject IContactService service;
 @{
     ViewData["Title"] = "Add Contact";
 }
 @{
     var dto = new ContactDTO();
     var command = new AddContactCommand(dto);
+    var cities = service.GetAllCities();
 }
 <form class="mt-5" method="post" asp-action="AddContact" asp-controller="Contact">
     <input type="text" asp-for="@command.contact.Name" required placeholder="نام" /><br />
     <input type="text" asp-for="@command.contact.PhoneNumber" required placeholder="شماره تلفن همراه" /><br />
     <span class="text-danger" asp-validation-for="@command.contact.PhoneNumber"></span>
-    <select asp-for="@command.contact.CityType" asp-items="Html.GetEnumSelectList<City>()">
+    <select asp-for="@command.contact.CityType">
         <br />
-        <option></option>
+        @foreach(var city in cities){
+            <option>@city</option>
+        }
     </select>
     <button type="submit" class="btn btn-warning">افزودن</button>
 
