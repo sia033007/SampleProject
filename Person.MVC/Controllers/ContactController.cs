@@ -107,18 +107,5 @@ namespace Person.MVC.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        public ActionResult SearchDeletedContacts(string search)
-        {
-            try
-            {
-                var deletedContacts = _contactService.LiveSearchForDeletedContacts(search);
-                return PartialView(deletedContacts);
-            }
-            catch(Exception exp)
-            {
-                return RedirectToAction("Index", "Home");
-
-            }
-        }
     }
 }

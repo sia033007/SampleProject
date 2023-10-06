@@ -83,22 +83,6 @@ namespace Person.Infrastructure
             return contactDTO;
 
         }
-        public async Task<List<DeletedContactDTO>> LiveSearchForDeletedContacts(string search)
-        {
-            List<DeletedContact> deletedContacts = (
-                from t in _context.DeletedContacts
-                where t.Name.Contains(search) || t.PhoneNumber.Contains(search) || t.CityType.ToString().Contains(search)
-                select t
-                ).ToList();
-            var deleteContactDTO = new List<DeletedContactDTO>();
-            foreach (var contact in deletedContacts)
-            {
-                var dto = _mapper.Map<DeletedContactDTO>(contact);
-                deleteContactDTO.Add(dto);
-            }
-            return deleteContactDTO;
-
-        }
         public List<string> GetAllCities()
         {
             var cities = new List<string>()

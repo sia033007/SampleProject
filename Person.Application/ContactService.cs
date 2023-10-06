@@ -49,11 +49,6 @@ namespace Person.Application
             return await _contactRepository.LiveSearchForContacts(search);
 
         }
-        public async Task<List<DeletedContactDTO>> LiveSearchForDeletedContacts(string search)
-        {
-            return await _contactRepository.LiveSearchForDeletedContacts(search);
-
-        }
         public List<string> GetAllCities()
         {
             return _contactRepository.GetAllCities();
