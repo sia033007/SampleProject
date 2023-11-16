@@ -1,6 +1,12 @@
-﻿@{
+﻿@model ContactDTO
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
+@if(Model != null){
+    <p>@Model.Name</p>
+    <p>@Model.PhoneNumber</p>
+    <p>@Model.CityType</p>
+}
 
 <p>Use this page to detail your site's privacy policy.</p>

@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Person.Domain", "Person.Domain\Person.Domain.csproj", "{3F16C7FD-D6A8-43D7-A42A-4CF839122C07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Person.Domain", "Person.Domain\Person.Domain.csproj", "{3F16C7FD-D6A8-43D7-A42A-4CF839122C07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Person.Application", "Person.Application\Person.Application.csproj", "{617324AC-22D5-4E0F-8839-FAEA57155C8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Person.Application", "Person.Application\Person.Application.csproj", "{617324AC-22D5-4E0F-8839-FAEA57155C8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Person.Infrastructure", "Person.Infrastructure\Person.Infrastructure.csproj", "{E903235E-FA45-4AF5-8D43-B08E21B45521}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Person.Infrastructure", "Person.Infrastructure\Person.Infrastructure.csproj", "{E903235E-FA45-4AF5-8D43-B08E21B45521}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Person.MVC", "Person.MVC\Person.MVC.csproj", "{304BD8D1-0EC7-4111-A565-A9A7A2026E18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Person.MVC", "Person.MVC\Person.MVC.csproj", "{304BD8D1-0EC7-4111-A565-A9A7A2026E18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Person.Test", "Person.Test\Person.Test.csproj", "{B711598E-A58D-48BC-9596-5F99F8A1E75C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{304BD8D1-0EC7-4111-A565-A9A7A2026E18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{304BD8D1-0EC7-4111-A565-A9A7A2026E18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{304BD8D1-0EC7-4111-A565-A9A7A2026E18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B711598E-A58D-48BC-9596-5F99F8A1E75C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B711598E-A58D-48BC-9596-5F99F8A1E75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B711598E-A58D-48BC-9596-5F99F8A1E75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B711598E-A58D-48BC-9596-5F99F8A1E75C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

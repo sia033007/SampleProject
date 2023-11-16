@@ -42,11 +42,12 @@ namespace Person.MVC.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateContact(UpdateContactCommand command)
+        public async Task<IActionResult> UpdateContact([FromBody] ContactDTO dTO)
         {
             try
             {
                 if (!ModelState.IsValid) return RedirectToAction("GetContact");
+                var command = new UpdateContactCommand(dTO);
                 await _mediator.Send(command);
                 return RedirectToAction("GetAllContacts");
             }
@@ -56,11 +57,12 @@ namespace Person.MVC.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> AddContact(AddContactCommand command)
+        public async Task<IActionResult> AddContact([FromBody] ContactDTO dTO)
         {
             try
             {
                 if (!ModelState.IsValid) return View();
+                var command = new AddContactCommand(dTO);
                 await _mediator.Send(command);
                 return RedirectToAction("GetAllContacts");
             }
